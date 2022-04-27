@@ -71,6 +71,8 @@ const Login = () => {
     setTimeout(() => {
       if (getApp() !== null) {
         if (location.pathname === '/login') {
+          getApp().classList.remove('landing-bg')
+          getApp().classList.remove('singup-bg')
           getApp().classList.add('login-bg')
         }
       } else {

@@ -17,7 +17,6 @@ function App() {
   return (
     <div id="App">
       <ThemeProvider theme={theme}>
-
         <BrowserRouter >
           <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto' }}>
             <Navigation />

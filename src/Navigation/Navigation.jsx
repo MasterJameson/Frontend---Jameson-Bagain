@@ -93,8 +93,15 @@ const Navigation = () => {
   const [showComponents, setShowComponents] = React.useState(false);
 
   useEffect(() => {
-    if (location.pathname !== '/login') {
-      getApp().classList.remove('login-bg')
+    if (getApp() !== null) {
+      if (location.pathname !== '/login' && location.pathname !== '/register') {
+        getApp().classList.remove('login-bg')
+        getApp().classList.add('landing-bg')
+      } else {
+        getApp().classList.remove('landing-bg')
+      }
+    } else {
+      getApp()
     }
   })
 
@@ -103,7 +110,6 @@ const Navigation = () => {
     <div className={classes.navContainer}>
       <p className={classes.title}><span style={{ paddingRight: 10 }}><img src={linesGroup} alt="" /></span>NOW UI KIT PRO</p>
       <ul className={classes.navUl}>
-
         <li>
           <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
 
@@ -114,10 +120,10 @@ const Navigation = () => {
             {showComponents &&
               <div className={classes.dropDownContent}>
                 <span style={{ marginBottom: 10, display: 'block', }}>
-                  <Link to={'about'} className={classes.anchor}>About</Link>
+                  <Link to={'login'} className={classes.anchor}>Login</Link>
                 </span>
                 <span>
-                  <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>
+                  <Link to={'register'} className={classes.anchor}>Signup</Link>
                 </span>
               </div>
             }
@@ -133,7 +139,7 @@ const Navigation = () => {
             {showSection &&
               <div className={classes.dropDownContent}>
                 <span style={{ marginBottom: 10, display: 'block', }}>
-                  <Link to={'about'} className={classes.anchor}>About</Link>
+                  <Link to={'contact'} className={classes.anchor}>Contact</Link>
                 </span>
                 <span>
                   <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>

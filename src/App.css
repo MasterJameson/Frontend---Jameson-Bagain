@@ -8,6 +8,11 @@
 .singup-bg {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(44, 44, 44, 0.2) 123.48%);
 }
+.landing-bg {
+  background-image: url('./images//img/landingBg.png');
+  background-size: 100% 100%;
+  background-position: center;
+}
 
 .App-logo {
   height: 40vmin;

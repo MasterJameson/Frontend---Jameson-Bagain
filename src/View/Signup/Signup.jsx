@@ -62,6 +62,7 @@ const Signup = () => {
     setTimeout(() => {
       if (getApp() !== null) {
         if (location.pathname === '/register') {
+          getApp().classList.remove('landing-bg')
           getApp().classList.add('singup-bg')
         }
       } else {
