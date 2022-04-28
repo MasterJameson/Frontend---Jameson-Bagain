@@ -9,9 +9,13 @@
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(44, 44, 44, 0.2) 123.48%);
 }
 .landing-bg {
+  height: 622px;
   background-image: url('./images//img/landingBg.png');
   background-size: 100% 100%;
   background-position: center;
+}
+.footer-bg {
+  background-color: #F2F2F2;
 }
 
 .App-logo {

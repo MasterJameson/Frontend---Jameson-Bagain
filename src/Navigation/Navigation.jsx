@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal',
     fontWeight: 400,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'baseline',
   },
   anchor: {
     display: 'block',
-    padding: '0 36px 0 0',
+    padding: '0 36px 10px 0',
     textDecoration: 'none',
     transition: '0.5s',
     color: '#fff',
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
     marginRight: 36,
+    marginBottom: 10,
   },
   dropDownSpan: {
     display: 'flex',
@@ -55,9 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   dropDownContent: {
     position: 'absolute',
-    top: '25px',
-    left: '30px',
-    width: 'fit-content',
+    minWidth: 160,
+    zIndex: 1,
   },
   buyBtn: {
     width: 98,
@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     fontSize: 12,
     color: '#fff',
+    cursor: 'pointer',
   },
   navContainer: {
     display: 'flex',
@@ -108,7 +109,7 @@ const Navigation = () => {
 
   return (
     <div className={classes.navContainer}>
-      <p className={classes.title}><span style={{ paddingRight: 10 }}><img src={linesGroup} alt="" /></span>NOW UI KIT PRO</p>
+      <p className={classes.title} onClick={() => navigate('')}><span style={{ paddingRight: 10 }}><img src={linesGroup} alt="" /></span>NOW UI KIT PRO</p>
       <ul className={classes.navUl}>
         <li>
           <div className={classes.dropDownDiv} onClick={() => setShowComponents(showComponents ? false : true)}>
@@ -117,17 +118,17 @@ const Navigation = () => {
             <p className={classes.dropDownStlye}>COMPONENTS</p>
 
             <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
-            {showComponents &&
-              <div className={classes.dropDownContent}>
-                <span style={{ marginBottom: 10, display: 'block', }}>
-                  <Link to={'login'} className={classes.anchor}>Login</Link>
-                </span>
-                <span>
-                  <Link to={'register'} className={classes.anchor}>Signup</Link>
-                </span>
-              </div>
-            }
           </div>
+          {showComponents &&
+            <div className={classes.dropDownContent} onMouseLeave={() => setShowComponents(false)}>
+              <span style={{ display: 'block', }}>
+                <Link to={'login'} className={classes.anchor}>Login</Link>
+              </span>
+              <span>
+                <Link to={'register'} className={classes.anchor}>Signup</Link>
+              </span>
+            </div>
+          }
         </li>
         <li>
           <div className={classes.dropDownDiv} onClick={() => setShowSection(showSection ? false : true)}>
@@ -136,34 +137,34 @@ const Navigation = () => {
             <p className={classes.dropDownStlye}>SECTIONS</p>
 
             <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
-            {showSection &&
-              <div className={classes.dropDownContent}>
-                <span style={{ marginBottom: 10, display: 'block', }}>
-                  <Link to={'contact'} className={classes.anchor}>Contact</Link>
-                </span>
-                <span>
-                  <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>
-                </span>
-              </div>
-            }
           </div>
+          {showSection &&
+            <div className={classes.dropDownContent} onMouseLeave={() => setShowSection(false)}>
+              <span style={{ display: 'block', }}>
+                <Link to={'contact'} className={classes.anchor}>Contact</Link>
+              </span>
+              <span>
+                <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>
+              </span>
+            </div>
+          }
         </li>
         <li>
           <div className={classes.dropDownDiv} onClick={() => setShowSample(showSample ? false : true)}>
             <span className={classes.dropDownSpan}><img src={sampleIcon} alt="" /></span>
             <p className={classes.dropDownStlye}>EXAMPLES</p>
             <span className={classes.dropDownSpan}><img src={dropDownIcon} alt="" /></span>
-            {showSample &&
-              <div className={classes.dropDownContent}>
-                <span style={{ marginBottom: 10, display: 'block', }}>
-                  <Link to={'about'} className={classes.anchor}>About</Link>
-                </span>
-                <span>
-                  <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>
-                </span>
-              </div>
-            }
           </div>
+          {showSample &&
+            <div className={classes.dropDownContent} onMouseLeave={() => setShowSample(false)} >
+              <span style={{ display: 'block', }}>
+                <Link to={'about'} className={classes.anchor}>About</Link>
+              </span>
+              <span>
+                <Link to={'blog-post'} className={classes.anchor}>Blog Post</Link>
+              </span>
+            </div>
+          }
         </li>
         <li>
           <button type="button" className={classes.buyBtn} onClick={() => navigate('')}>Buy Now</button>

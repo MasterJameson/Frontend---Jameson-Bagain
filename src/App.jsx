@@ -28,8 +28,8 @@ function App() {
               <Route path='/about' element={<AboutUs />} />
               <Route path='/blog-post' element={<BlogPost />} />
             </Routes>
-            <Footer />
           </div>
+          <Footer />
         </BrowserRouter>
       </ThemeProvider>
     </div>
