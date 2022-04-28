@@ -41,7 +41,15 @@ const Signup = () => {
       }
     })
   })
-
+  const handleReset = () => {
+    setRegister({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      isFormValid: false
+    })
+  }
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -62,6 +70,12 @@ const Signup = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then(response => response.json()).then(data => setResponseApi(data))
+
+    setTimeout(() => {
+      if (responseApi !== undefined && responseApi.success === 1) {
+        handleReset()
+      }
+    }, 1000)
   }
 
   console.log(responseApi)
@@ -151,8 +165,12 @@ const Signup = () => {
             }}>
               <input type="checkbox" value={checkbox} onChange={(e) => setCheckbbox(e.target.checked)} name="tnc" className={classes.inputCheck} />
               <label htmlFor='tnc' style={{ paddingLeft: 13 }}>I agree to the terms and conditions</label>
-            </div>
-            <p style={{ marginTop: 10, color: 'red' }}>{responseApi !== undefined && responseApi.message}</p>
+            </div>{responseApi !== undefined &&
+              <div>
+                < p style={{ marginTop: 10, color: 'red' }}>{responseApi.success === 0 && responseApi.message}</p>
+                <p style={{ marginTop: 10, color: 'blue' }}>{responseApi.success === 1 && responseApi.message}</p>
+              </div>
+            }
             <button type='submit' disabled={!checkbox} onClick={handleSubmit} className={!checkbox ? classes.disablebBtnStyle : classes.btnStyle}>Get Started</button>
 
           </form>
