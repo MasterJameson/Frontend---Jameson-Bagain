@@ -58,7 +58,6 @@ const Signup = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('register', register)
     const data = {
       name: register.firstName + ' ' + register.lastName,
       email: register.email,

@@ -30,7 +30,7 @@ const LandingPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const classes = useStyles()
-
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     setTimeout(() => {
@@ -41,8 +41,9 @@ const LandingPage = () => {
       } else {
         getApp()
       }
-    })
+    }, 1000)
   })
+  console.log('token', token)
 
   return (
     <>

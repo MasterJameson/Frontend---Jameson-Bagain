@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import getApp from '../getElement';
 import fNameIcon from '../../images/icon/firstNameIcon.png'
@@ -10,6 +10,12 @@ const Login = () => {
   const location = useLocation();
   const classes = loginStyle()
   const navigate = useNavigate();
+  const [responseApi, setResponseApi] = useState()
+
+  const [loginAcc, setLoginAcc] = useState({
+    email: '',
+    password: '',
+  })
 
   useEffect(() => {
     setTimeout(() => {
@@ -27,7 +33,39 @@ const Login = () => {
   const hadleNavigateTo = (item) => {
     if (item === 'register') navigate('/register')
     if (item === 'contact') navigate('/contact')
+    if (item === '/') navigate('/')
+    console.log(item)
   }
+
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setLoginAcc({ ...loginAcc, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email: loginAcc.email,
+      password: loginAcc.password,
+    }
+    const url = 'https://astibot.unidelc.com/login.php'
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(response => response.json()).then(data => setResponseApi(data))
+
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      if (responseApi !== undefined && responseApi.success === 1) {
+        localStorage.setItem('token', responseApi.token)
+        hadleNavigateTo('/')
+      }
+    }, 1000)
+  }, [responseApi])
+
 
   return (
     <div>
@@ -35,10 +73,12 @@ const Login = () => {
         <div className={classes.inputDiv}>
           <input
             required
-            name="firstName"
+            name="email"
+            type="text"
             autoFocus
             className={classes.inputStyle}
-            // onChange={handlePhoneNumberChange}
+            value={loginAcc.email}
+            onChange={(e) => handleChange(e)}
             placeholder="Your Email…"
           />
           <span className={classes.inputIcon}><img src={fNameIcon} alt="" /></span>
@@ -46,15 +86,17 @@ const Login = () => {
         <div className={classes.inputDiv}>
           <input
             required
-            name="lastName"
+            type="password"
+            name="password"
             className={classes.inputStyle}
-            // onChange={handlePhoneNumberChange}
+            value={loginAcc.password}
+            onChange={(e) => handleChange(e)}
             placeholder="Your Password…"
           />
           <span className={classes.inputIcon}><img src={lNameIcon} alt="" /></span>
         </div>
 
-        <button type='submit' className={classes.btnStyle}>Get Started</button>
+        <button type='submit' className={classes.btnStyle} onClick={handleSubmit}>Get Started</button>
         <div>
           <span>
           </span>
