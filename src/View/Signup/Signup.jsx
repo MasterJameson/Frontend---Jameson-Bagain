@@ -71,12 +71,16 @@ const Signup = () => {
       body: JSON.stringify(data)
     }).then(response => response.json()).then(data => setResponseApi(data))
 
+  }
+  useEffect(() => {
+
     setTimeout(() => {
       if (responseApi !== undefined && responseApi.success === 1) {
+        console.log('test')
         handleReset()
       }
     }, 1000)
-  }
+  }, [responseApi])
 
   console.log(responseApi)
 
