@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 
-const signupStyle = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   colDiv: {
     position: 'relative',
     width: 240,
@@ -97,6 +97,16 @@ const signupStyle = makeStyles((theme) => ({
     color: '#fff',
     cursor: 'pointer',
   },
+  disablebBtnStyle: {
+    width: 177,
+    marginTop: 58,
+    padding: '17px 0 16px',
+    backgroundColor: 'gray',
+    fontSize: 14,
+    border: 'none',
+    borderRadius: '24px',
+    color: '#fff',
+  },
   inputCheck: {
     border: '1px solid #E3E3E3',
     boxSizing: 'border-box',
@@ -107,4 +117,4 @@ const signupStyle = makeStyles((theme) => ({
 
 }))
 
-export default signupStyle
+export default useStyles

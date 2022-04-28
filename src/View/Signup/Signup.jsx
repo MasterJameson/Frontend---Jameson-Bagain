@@ -20,8 +20,14 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [register, setRegister] = useState({
-    name: ''
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    isFormValid: false
   })
+  const [responseApi, setResponseApi] = useState()
+  const [checkbox, setCheckbbox] = useState(false)
 
   useEffect(() => {
     setTimeout(() => {
@@ -35,6 +41,31 @@ const Signup = () => {
       }
     })
   })
+
+
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setRegister({ ...register, [name]: value })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('register', register)
+    const data = {
+      name: register.firstName + ' ' + register.lastName,
+      email: register.email,
+      password: register.password,
+    }
+    const url = 'https://astibot.unidelc.com/reg.php'
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(response => response.json()).then(data => setResponseApi(data))
+  }
+
+  console.log(responseApi)
+
   return (
     <>
       <div className={classes.signUpMainDiv}>
@@ -63,14 +94,15 @@ const Signup = () => {
             <li><img src={signUpFbIcon} alt="" /></li>
           </ul>
           <p className={classes.subTitleRight}>or be classical</p>
-          <form style={{ margin: '0 20px 60px' }}>
+          <form style={{ margin: '0 20px 60px' }} >
             <div className={classes.inputDiv}>
               <input
                 required
                 type="text"
                 name="firstName"
                 className={classes.inputStyle}
-                // onChange={handlePhoneNumberChange}
+                value={register.firstName}
+                onChange={(e) => handleChange(e)}
                 placeholder="First Name…"
               />
               <span className={classes.inputIcon}><img src={fNameIcon} alt="" /></span>
@@ -80,8 +112,9 @@ const Signup = () => {
                 required
                 type="text"
                 name="lastName"
+                value={register.lastName}
                 className={classes.inputStyle}
-                // onChange={handlePhoneNumberChange}
+                onChange={(e) => handleChange(e)}
                 placeholder="Last Name..."
               />
               <span className={classes.inputIcon}><img src={lNameIcon} alt="" /></span>
@@ -90,9 +123,10 @@ const Signup = () => {
               <input
                 required
                 type="text"
+                value={register.email}
                 name="email"
                 className={classes.inputStyle}
-                // onChange={handlePhoneNumberChange}
+                onChange={(e) => handleChange(e)}
                 placeholder="Your Email..."
               />
               <span className={classes.inputIcon}><img src={signUpEmail} alt="" /></span>
@@ -101,9 +135,10 @@ const Signup = () => {
               <input
                 required
                 type="password"
+                value={register.password}
                 name="password"
                 className={classes.inputStyle}
-                // onChange={handlePhoneNumberChange}
+                onChange={(e) => handleChange(e)}
                 placeholder="Your Password..."
               />
               <span className={classes.inputIcon}><img src={fNameIcon} alt="" /></span>
@@ -114,10 +149,10 @@ const Signup = () => {
               alignItems: 'center',
               margin: '0 auto',
             }}>
-              <input type="checkbox" name="tnc" className={classes.inputCheck} />
+              <input type="checkbox" value={checkbox} onChange={(e) => setCheckbbox(e.target.checked)} name="tnc" className={classes.inputCheck} />
               <label htmlFor='tnc' style={{ paddingLeft: 13 }}>I agree to the terms and conditions</label>
             </div>
-            <button type='submit' className={classes.btnStyle}>Get Started</button>
+            <button type='submit' disabled={!checkbox} onClick={handleSubmit} className={!checkbox ? classes.disablebBtnStyle : classes.btnStyle}>Get Started</button>
 
           </form>
         </div>
