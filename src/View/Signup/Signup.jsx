@@ -152,6 +152,7 @@ const Signup = () => {
               <input type="checkbox" value={checkbox} onChange={(e) => setCheckbbox(e.target.checked)} name="tnc" className={classes.inputCheck} />
               <label htmlFor='tnc' style={{ paddingLeft: 13 }}>I agree to the terms and conditions</label>
             </div>
+            <p style={{ marginTop: 10, color: 'red' }}>{responseApi !== undefined && responseApi.message}</p>
             <button type='submit' disabled={!checkbox} onClick={handleSubmit} className={!checkbox ? classes.disablebBtnStyle : classes.btnStyle}>Get Started</button>
 
           </form>
